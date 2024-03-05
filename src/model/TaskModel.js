@@ -1,11 +1,10 @@
-const { default: mongoose } = require('mongoose');
-const mongoose = require('../config/databese');
-const mongoose = mongoose.Schema;
+const mongoose = require('../config/database');
+const Schema = mongoose.Schema;
 
 const TaskSchema = new Schema({
     macaddress: {type: String, require: true},
     type: {type: Number, require: true},
-    title: {type: String. require: true},
+    title: {type: String, require: true},
     description: {type: String, require: true},
     when: {type: Date, require: true},
     done: {type: Boolean, default: false},
