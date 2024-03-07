@@ -52,6 +52,16 @@ class TaskController {
                     .json({ error: "error na consulta da tarefa" });
             });
     }
+
+    async delete(req, res) {
+        await TaskModel.deleteOne({ _id: req.params.id })
+            .then((response) => {
+                return res.status(200).json(response);
+            })
+            .catch((erro) => {
+                return res.status(500).json(error);
+            });
+    }
 }
 
 module.exports = new TaskController();
