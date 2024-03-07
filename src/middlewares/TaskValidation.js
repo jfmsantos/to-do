@@ -1,5 +1,5 @@
 const TaskModel = require("../model/TaskModel");
-const { isPast } = require("data-fns");
+const { isPast } = require("date-fns");
 
 const TaskValidation = async (req, res, next) => {
     const { macaddress, type, title, description, when } = req.body;
@@ -14,8 +14,11 @@ const TaskValidation = async (req, res, next) => {
         return res.status(400).json({ error: "descrição é obrigatória" });
     else if (!when)
         return res.status(400).json({ error: "Data e Hora são obrigatórios" });
-    /*else if (isPast(new Date(when)))
-        return res.status(400).json({ error: 'informe uma data e hora futura' });*/ else {
+    else if (isPast(new Date(when)))
+        return res
+            .status(400)
+            .json({ error: "informe uma data e hora futura" });
+    else {
         let exists;
 
         if (req.params.id) {
