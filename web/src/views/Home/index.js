@@ -1,7 +1,15 @@
 import React from "react";
+import * as S from "./styles";
+
+//Componentes
+import Header from "../../components/Header";
 
 function Home() {
-    return <h1>HOME</h1>;
+    return (
+        <S.Container>
+            <Header />
+        </S.Container>
+    );
 }
 
 export default Home;
