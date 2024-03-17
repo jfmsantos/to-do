@@ -29,21 +29,28 @@ export const RightSide = styled.div`
     align-items: center;
     justify-content: flex-end;
 
-    a {
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    a,
+    button {
         color: #fff;
         font-weight: bold;
         text-decoration: none;
         margin: 0 10px;
+
         &:hover {
             color: #ee6b26;
         }
-    }
 
-    #notification {
         img {
             width: 25px;
             height: 30px;
         }
+
         span {
             background: #fff;
             color: #ee6b26;
@@ -58,9 +65,14 @@ export const RightSide = styled.div`
             opacity: 0.5;
         }
     }
+
     .dividir::after {
         content: "|";
-        color: #fff;
         margin: 0 10px;
+        color: #fff;
+    }
+
+    button {
+        font-size: 16px;
     }
 `;
