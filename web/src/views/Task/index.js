@@ -89,6 +89,13 @@ function Task() {
         }
     }
 
+    async function remove() {
+        const res = window.confirm("Deseja realmente remover a tarefa?");
+        if (res === true) {
+            await api.delete(`/task/${params.id}`).then(() => navigate("/"));
+        }
+    }
+
     useEffect(() => {
         lateVerify();
         loadTaskDetails();
@@ -167,7 +174,11 @@ function Task() {
                         />
                         <span>Concluído</span>
                     </div>
-                    <button type="button">Excluir</button>
+                    {params.id && (
+                        <button type="button" onClick={remove}>
+                            Excluir
+                        </button>
+                    )}
                 </S.Options>
 
                 <S.Save>
