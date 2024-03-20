@@ -96,7 +96,7 @@ function Task() {
 
                 <S.TextArea>
                     <span>Descrição</span>
-                    <textArea
+                    <textarea
                         rows={5}
                         placeholder="Detalhes da tarefa..."
                         onChange={(e) => setDescription(e.target.value)}
