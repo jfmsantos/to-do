@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./styles";
+import { format } from "date-fns";
+import { useParams } from "react-router-dom";
+
 import api from "../../services/api";
 
 //Componentes
@@ -11,6 +14,8 @@ import iconCalender from "../../assets/calendar.png";
 import iconClock from "../../assets/clock.png";
 
 function Task() {
+    let params = useParams();
+
     const [lateCount, setLateCount] = useState();
     const [type, setType] = useState();
     const [id, setId] = useState();
@@ -29,6 +34,16 @@ function Task() {
             });
     }
 
+    async function loadTaskDetails() {
+        await api.get(`/task/${params.id}`).then((response) => {
+            setType(response.data.type);
+            setTitle(response.data.title);
+            setDescription(response.data.description);
+            setDate(format(new Date(response.data.when), "yyyy-MM-dd"));
+            setHour(format(new Date(response.data.when), "HH:mm"));
+        });
+    }
+
     async function save() {
         await api
             .post("/task", {
@@ -43,6 +58,7 @@ function Task() {
 
     useEffect(() => {
         lateVerify();
+        loadTaskDetails();
     }, []);
     return (
         <S.Container>

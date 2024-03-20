@@ -10,6 +10,7 @@ export default function Rotas() {
             <Routes>
                 <Route path="/" Component={Home} />
                 <Route path="/task" Component={Task} />
+                <Route path="/task/:id" Component={Task} />
             </Routes>
         </BrowserRouter>
     );
