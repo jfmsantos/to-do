@@ -40,6 +40,7 @@ function Task() {
             await api.get(`/task/${params.id}`).then((response) => {
                 setType(response.data.type);
                 setTitle(response.data.title);
+                setDone(response.data.done);
                 setDescription(response.data.description);
                 setDate(format(new Date(response.data.when), "yyyy-MM-dd"));
                 setHour(format(new Date(response.data.when), "HH:mm"));
@@ -48,6 +49,22 @@ function Task() {
     }
 
     async function save() {
+        if (!type) {
+            return alert("Você precisa selecionar o tipo da terefa");
+        } else if (!title) {
+            return alert("Você precisa informar o título da terefa");
+        } else if (title.length < 5) {
+            return alert(
+                "Informar no mínimo 5 caracteres para o título da terefa"
+            );
+        } else if (!description) {
+            return alert("Você precisa informar a descrição da terefa");
+        } else if (!date) {
+            return alert("Você precisa definir a data da terefa");
+        } else if (!hour) {
+            return alert("Você precisa definir a hora da terefa");
+        }
+
         if (params.id) {
             await api
                 .put(`/task/${params.id}`, {
@@ -107,6 +124,7 @@ function Task() {
                         placeholder="Título da tarefa..."
                         onChange={(e) => setTitle(e.target.value)}
                         value={title}
+                        maxLength={25}
                     />
                 </S.Input>
 
@@ -117,6 +135,7 @@ function Task() {
                         placeholder="Detalhes da tarefa..."
                         onChange={(e) => setDescription(e.target.value)}
                         value={description}
+                        maxLength={250}
                     />
                 </S.TextArea>
 
