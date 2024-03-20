@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./styles";
 import { format } from "date-fns";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import api from "../../services/api";
 
@@ -15,6 +15,7 @@ import iconClock from "../../assets/clock.png";
 
 function Task() {
     let params = useParams();
+    let navigate = useNavigate();
 
     const [lateCount, setLateCount] = useState();
     const [type, setType] = useState();
@@ -35,25 +36,40 @@ function Task() {
     }
 
     async function loadTaskDetails() {
-        await api.get(`/task/${params.id}`).then((response) => {
-            setType(response.data.type);
-            setTitle(response.data.title);
-            setDescription(response.data.description);
-            setDate(format(new Date(response.data.when), "yyyy-MM-dd"));
-            setHour(format(new Date(response.data.when), "HH:mm"));
-        });
+        if (params.id) {
+            await api.get(`/task/${params.id}`).then((response) => {
+                setType(response.data.type);
+                setTitle(response.data.title);
+                setDescription(response.data.description);
+                setDate(format(new Date(response.data.when), "yyyy-MM-dd"));
+                setHour(format(new Date(response.data.when), "HH:mm"));
+            });
+        }
     }
 
     async function save() {
-        await api
-            .post("/task", {
-                macaddress,
-                type,
-                title,
-                description,
-                when: `${date}T${hour}:00.000`,
-            })
-            .then(() => alert("Tarefa cadastrada com sucesso!"));
+        if (params.id) {
+            await api
+                .put(`/task/${params.id}`, {
+                    macaddress,
+                    done,
+                    type,
+                    title,
+                    description,
+                    when: `${date}T${hour}:00.000`,
+                })
+                .then(() => navigate("/"));
+        } else {
+            await api
+                .post("/task", {
+                    macaddress,
+                    type,
+                    title,
+                    description,
+                    when: `${date}T${hour}:00.000`,
+                })
+                .then(() => navigate("/"));
+        }
     }
 
     useEffect(() => {
