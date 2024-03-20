@@ -8,6 +8,16 @@ export const Container = styled.div`
     border-bottom: 5px solid #ee6b26;
 
     display: flex;
+
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
 `;
 
 export const LeftSide = styled.div`
@@ -29,12 +39,6 @@ export const RightSide = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
-    button {
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
 
     a,
     button {
@@ -60,10 +64,6 @@ export const RightSide = styled.div`
             position: relative;
             top: -20px;
             right: 10px;
-        }
-
-        &:hover {
-            opacity: 0.5;
         }
     }
 

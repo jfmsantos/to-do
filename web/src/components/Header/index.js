@@ -6,11 +6,13 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import bell from "../../assets/bell.png";
 
-function Header({ lateCount, clickNotificatio }) {
+function Header({ clickRedirect, lateCount, clickNotificatio }) {
     return (
         <S.Container>
             <S.LeftSide>
-                <img src={logo} alt="Logo" />
+                <button onClick={clickRedirect}>
+                    <img src={logo} alt="Logo" />
+                </button>
             </S.LeftSide>
             <S.RightSide>
                 <Link to="/">INÍCIO</Link>

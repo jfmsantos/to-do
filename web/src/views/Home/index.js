@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as S from "./styles";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 //Componentes
 import Header from "../../components/Header";
@@ -13,6 +14,8 @@ function Home() {
     const [filterActived, setFilterActived] = useState("today");
     const [tasks, setTasks] = useState([]);
     const [lateCount, setLateCount] = useState();
+
+    let navigate = useNavigate();
 
     async function loadTasks() {
         await api
@@ -34,13 +37,22 @@ function Home() {
         setFilterActived("late");
     }
 
+    function Redirect() {
+        setFilterActived("today");
+        return navigate("/");
+    }
+
     useEffect(() => {
         loadTasks();
         lateVerify();
     }, [filterActived]);
     return (
         <S.Container>
-            <Header lateCount={lateCount} clickNotificatio={Notification} />
+            <Header
+                clickRedirect={Redirect}
+                lateCount={lateCount}
+                clickNotificatio={Notification}
+            />
             <S.FilterArea>
                 <button type="button" onClick={() => setFilterActived("all")}>
                     <FilterCard
