@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./styles";
-import { useNavigate } from "react-router-dom";
+import Qr from "qrcode.react";
 
 //Componentes
 import Header from "../../components/Header";
@@ -12,8 +12,16 @@ function Qrcode() {
             <Header></Header>
             <S.Content>
                 <h1>Capture o QrCode pelo App</h1>
-                <S.QrcodeArea></S.QrcodeArea>
                 <p>Sua atividades serão sincronizadas com o seu celular</p>
+                <S.QrcodeArea>
+                    <Qr value="getmacaddress" size={350} />
+                </S.QrcodeArea>
+
+                <S.ValidationCode>
+                    <span>Digite a numeração que apareceu no celular</span>
+                    <input type="text" maxLength={20} />
+                    <button>SINCONIZAR</button>
+                </S.ValidationCode>
             </S.Content>
             <Footer></Footer>
         </S.Container>
