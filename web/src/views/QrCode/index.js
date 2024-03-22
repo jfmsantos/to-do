@@ -12,13 +12,13 @@ function Qrcode() {
             <Header></Header>
             <S.Content>
                 <h1>Capture o QrCode pelo App</h1>
-                <p>Sua atividades serão sincronizadas com o seu celular</p>
+                <p>Suas atividades serão sincronizadas com o seu celular.</p>
                 <S.QrcodeArea>
                     <Qr value="getmacaddress" size={350} />
                 </S.QrcodeArea>
 
                 <S.ValidationCode>
-                    <span>Digite a numeração que apareceu no celular</span>
+                    <span>Digite a numeração que apareceu no celular.</span>
                     <input type="text" maxLength={20} />
                     <button>SINCONIZAR</button>
                 </S.ValidationCode>
