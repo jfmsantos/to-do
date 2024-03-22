@@ -16,8 +16,8 @@ import iconClock from "../../assets/clock.png";
 function Task() {
     let params = useParams();
     let navigate = useNavigate();
+    const [filterActived, setFilterActived] = useState();
 
-    const [lateCount, setLateCount] = useState();
     const [type, setType] = useState();
     const [id, setId] = useState();
     const [done, setDone] = useState(false);
@@ -26,14 +26,6 @@ function Task() {
     const [date, setDate] = useState();
     const [hour, setHour] = useState();
     const [macaddress, setMacaddress] = useState("22:11:11:11:11:11");
-
-    async function lateVerify() {
-        await api
-            .get(`/task/filter/late/22:11:11:11:11:11`)
-            .then((response) => {
-                setLateCount(response.data.length);
-            });
-    }
 
     async function loadTaskDetails() {
         if (params.id) {
@@ -96,13 +88,16 @@ function Task() {
         }
     }
 
+    function Notification() {
+        setFilterActived("late");
+    }
+
     useEffect(() => {
-        lateVerify();
         loadTaskDetails();
     }, []);
     return (
         <S.Container>
-            <Header lateCount={lateCount} />
+            <Header clickNotification={Notification} />
 
             <S.Form>
                 <S.TypeIcons>

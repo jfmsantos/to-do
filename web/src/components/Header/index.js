@@ -1,16 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./styles";
+import api from "../../services/api";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import logo from "../../assets/logo.png";
 import bell from "../../assets/bell.png";
 
-function Header({ clickRedirect, lateCount, clickNotificatio }) {
+function Header({ clickNotification }) {
+    const [lateCount, setLateCount] = useState();
+    const [filterActived, setFilterActived] = useState("today");
+    let navigate = useNavigate();
+
+    async function lateVerify() {
+        await api
+            .get(`/task/filter/late/22:11:11:11:11:11`)
+            .then((response) => {
+                setLateCount(response.data.length);
+            });
+    }
+    function Redirect() {
+        return navigate("/");
+    }
+
+    useEffect(() => {
+        lateVerify();
+    });
     return (
         <S.Container>
             <S.LeftSide>
-                <button onClick={clickRedirect}>
+                <button onClick={Redirect}>
                     <img src={logo} alt="Logo" />
                 </button>
             </S.LeftSide>
@@ -19,12 +38,16 @@ function Header({ clickRedirect, lateCount, clickNotificatio }) {
                 <span className="dividir" />
                 <Link to="/task">NOVA TAREFA</Link>
                 <span className="dividir" />
-                <a href="#">SINCRONIZAR CELULAR</a>
-                <span className="dividir" />
-                <button onClick={clickNotificatio}>
-                    <img src={bell} alt="Notificação" />
-                    <span>{lateCount}</span>
-                </button>
+                <Link to="/qrcode">SINCRONIZAR CELULAR</Link>
+                {lateCount && (
+                    <>
+                        <span className="dividir" />
+                        <button onClick={clickNotification}>
+                            <img src={bell} alt="Notificação" />
+                            <span>{lateCount}</span>
+                        </button>
+                    </>
+                )}
             </S.RightSide>
         </S.Container>
     );
