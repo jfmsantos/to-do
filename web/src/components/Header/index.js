@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./styles";
 import api from "../../services/api";
+import isConnected from "../../utils/isConnected";
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -26,6 +27,12 @@ function Header({ clickNotification }) {
     useEffect(() => {
         lateVerify();
     });
+
+    async function Logout() {
+        localStorage.removeItem("@todo/macaddress");
+        window.location.reload();
+    }
+
     return (
         <S.Container>
             <S.LeftSide>
@@ -34,18 +41,25 @@ function Header({ clickNotification }) {
                 </button>
             </S.LeftSide>
             <S.RightSide>
-                <Link to="/">INÍCIO</Link>
-                <span className="dividir" />
-                <Link to="/task">NOVA TAREFA</Link>
-                <span className="dividir" />
-                <Link to="/qrcode">SINCRONIZAR CELULAR</Link>
-                {lateCount && (
+                {!isConnected ? (
+                    <Link to="/qrcode">SINCRONIZAR CELULAR</Link>
+                ) : (
                     <>
+                        <Link to="/">INÍCIO</Link>
                         <span className="dividir" />
-                        <button onClick={clickNotification}>
-                            <img src={bell} alt="Notificação" />
-                            <span>{lateCount}</span>
-                        </button>
+                        <Link to="/task">NOVA TAREFA</Link>
+                        <span className="dividir" />
+                        <Link onClick={Logout}>SAIR</Link>
+
+                        {lateCount && (
+                            <>
+                                <span className="dividir" />
+                                <button onClick={clickNotification}>
+                                    <img src={bell} alt="Notificação" />
+                                    <span>{lateCount}</span>
+                                </button>
+                            </>
+                        )}
                     </>
                 )}
             </S.RightSide>

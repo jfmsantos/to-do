@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { useParams, useNavigate } from "react-router-dom";
 
 import api from "../../services/api";
+import isConnected from "../../utils/isConnected";
 
 //Componentes
 import Header from "../../components/Header";
@@ -93,6 +94,9 @@ function Task() {
     }
 
     useEffect(() => {
+        if (!isConnected) {
+            navigate("/qrcode");
+        }
         loadTaskDetails();
     }, []);
     return (

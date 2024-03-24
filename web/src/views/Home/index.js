@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../../services/api";
+import isConnected from "../../utils/isConnected";
 
 //Componentes
 import Header from "../../components/Header";
@@ -12,6 +13,7 @@ import TaskCard from "../../components/TaskCard";
 function Home() {
     const [filterActived, setFilterActived] = useState("today");
     const [tasks, setTasks] = useState([]);
+    let navigate = useNavigate();
 
     async function loadTasks() {
         await api
@@ -27,7 +29,10 @@ function Home() {
 
     useEffect(() => {
         loadTasks();
-    }, [filterActived]);
+        if (!isConnected) {
+            navigate("/qrcode");
+        }
+    }, [filterActived, loadTasks]);
     return (
         <S.Container>
             <Header clickNotification={Notification} />
