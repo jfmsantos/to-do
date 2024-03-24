@@ -14,11 +14,9 @@ function Header({ clickNotification }) {
     let navigate = useNavigate();
 
     async function lateVerify() {
-        await api
-            .get(`/task/filter/late/22:11:11:11:11:11`)
-            .then((response) => {
-                setLateCount(response.data.length);
-            });
+        await api.get(`/task/filter/late/${isConnected}`).then((response) => {
+            setLateCount(response.data.length);
+        });
     }
     function Redirect() {
         return navigate("/");

@@ -17,7 +17,7 @@ function Home() {
 
     async function loadTasks() {
         await api
-            .get(`/task/filter/${filterActived}/22:11:11:11:11:11`)
+            .get(`/task/filter/${filterActived}/${isConnected}`)
             .then((response) => {
                 setTasks(response.data);
             });

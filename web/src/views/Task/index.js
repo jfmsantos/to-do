@@ -26,7 +26,6 @@ function Task() {
     const [description, setDescription] = useState();
     const [date, setDate] = useState();
     const [hour, setHour] = useState();
-    const [macaddress, setMacaddress] = useState("22:11:11:11:11:11");
 
     async function loadTaskDetails() {
         if (params.id) {
@@ -61,7 +60,7 @@ function Task() {
         if (params.id) {
             await api
                 .put(`/task/${params.id}`, {
-                    macaddress,
+                    macaddress: isConnected,
                     done,
                     type,
                     title,
@@ -72,7 +71,7 @@ function Task() {
         } else {
             await api
                 .post("/task", {
-                    macaddress,
+                    macaddress: isConnected,
                     type,
                     title,
                     description,

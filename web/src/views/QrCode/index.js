@@ -12,9 +12,13 @@ function Qrcode() {
     let navigate = useNavigate();
 
     async function SaveMac() {
-        await localStorage.setItem("@todo/macaddress", mac);
-        navigate("/");
-        window.location.reload();
+        if (!mac) {
+            alert("Você precisa informar o número que apareceu no celular!");
+        } else {
+            await localStorage.setItem("@todo/macaddress", mac);
+            navigate("/");
+            window.location.reload();
+        }
     }
     return (
         <S.Container>
