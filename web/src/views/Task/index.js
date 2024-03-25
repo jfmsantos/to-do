@@ -17,7 +17,6 @@ import iconClock from "../../assets/clock.png";
 function Task() {
     let params = useParams();
     let navigate = useNavigate();
-    const [filterActived, setFilterActived] = useState();
 
     const [type, setType] = useState();
     const [id, setId] = useState();
@@ -88,10 +87,6 @@ function Task() {
         }
     }
 
-    function Notification() {
-        setFilterActived("late");
-    }
-
     useEffect(() => {
         if (!isConnected) {
             navigate("/qrcode");
@@ -100,7 +95,7 @@ function Task() {
     }, []);
     return (
         <S.Container>
-            <Header clickNotification={Notification} />
+            <Header />
 
             <S.Form>
                 <S.TypeIcons>

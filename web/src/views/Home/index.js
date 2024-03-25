@@ -32,7 +32,7 @@ function Home() {
         if (!isConnected) {
             navigate("/qrcode");
         }
-    }, [filterActived, loadTasks]);
+    }, [filterActived]);
     return (
         <S.Container>
             <Header clickNotification={Notification} />
