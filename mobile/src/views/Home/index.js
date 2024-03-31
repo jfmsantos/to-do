@@ -17,14 +17,14 @@ import TaskCard from "../../components/TaskCard";
 import api from "../../services/api";
 
 export default function Home() {
-    const [filter, setFilter] = useState("all");
+    const [filter, setFilter] = useState("today");
     const [tasks, setTasks] = useState([]);
     const [load, setLoad] = useState(false);
 
     async function loadTasks() {
         setLoad(true);
         await api
-            .get("/filter/all/22:11:11:11:11:11")
+            .get(`/filter/${filter}/11:11:11:11:11:11`)
             .then((response) => {
                 setTasks(response.data);
                 setLoad(false);
@@ -34,7 +34,7 @@ export default function Home() {
 
     useEffect(() => {
         loadTasks();
-    }, []);
+    }, [filter]);
 
     return (
         <View style={styles.container}>
