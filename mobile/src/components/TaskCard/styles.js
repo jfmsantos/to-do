@@ -5,18 +5,18 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         padding: 10,
-        width: "90%",
-        marginVertical: 10,
-        height: 80,
+        width: "95%",
+        marginVertical: 5,
+        height: 90,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 2,
+            height: 1,
         },
         shadowOpacity: 0.25,
-        shadowRadius: 4,
+        shadowRadius: 1,
         elevation: 5,
-        borderRadius: 10,
+        borderRadius: 5,
     },
 
     typeActive: {
@@ -27,11 +27,12 @@ const styles = StyleSheet.create({
     cardLeft: {
         flexDirection: "row",
         alignItems: "center",
+        marginLeft: 3,
     },
     cardTitle: {
-        marginLeft: 10,
+        marginLeft: 5,
         fontWeight: "bold",
-        fontSize: 16,
+        fontSize: 14,
     },
 
     cardRight: {
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     cardDate: {
         color: "#EE6B26",
         fontWeight: "bold",
-        fontSize: 16,
+        fontSize: 14,
     },
 
     cardTime: {
