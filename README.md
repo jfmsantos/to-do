@@ -74,7 +74,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 <details><summary>Tela - Inicial</summary>
 <p>
 
-#### Tela Startup.
+#### Splash.
 
 <img src="/prototipo/mobile/preview.png">
 
