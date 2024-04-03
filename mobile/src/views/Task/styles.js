@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-between",
         padding: 10,
+        marginBottom: 50,
     },
 
     inputInLine: {

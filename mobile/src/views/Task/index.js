@@ -13,8 +13,9 @@ import {
 //COMPONENTES
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-
 import typeIcons from "../../utils/typeIcons";
+import DateTimeInput from "../../components/DateTimeInput/index.android";
+
 import styles from "./styles";
 
 export default function Task() {
@@ -55,6 +56,9 @@ export default function Task() {
                     multiline={true}
                     placeholder="Detalhes da atividade que tenho que lembrar..."
                 />
+
+                <DateTimeInput type={"date"} />
+                <DateTimeInput type={"hour"} />
 
                 <View style={styles.inLine}>
                     <View style={styles.inputInLine}>
