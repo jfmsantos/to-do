@@ -14,7 +14,7 @@ import {
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import typeIcons from "../../utils/typeIcons";
-import DateTimeInput from "../../components/DateTimeInput/index.android";
+import DateTimeInput from "../../components/DateTimeInput/index";
 
 import styles from "./styles";
 

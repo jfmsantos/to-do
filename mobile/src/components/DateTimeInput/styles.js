@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-    input: {
+    textInput: {
         fontSize: 18,
         padding: 10,
         width: "95%",
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 
     iconTextInput: {
         position: "absolute",
-        left: "95%",
+        left: "90%",
         top: 35,
         width: 25,
         height: 25,
