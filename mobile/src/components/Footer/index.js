@@ -2,18 +2,24 @@ import React from "react";
 import { Text, View, Image, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
-import add from "../../assets/add.png";
-import save from "../../assets/save.png";
+import iconAdd from "../../assets/add.png";
+import iconSave from "../../assets/save.png";
 
-export default function Footer({ icon }) {
+export default function Footer({ icon, navigation, save }) {
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.button}>
-                <Image
-                    source={icon == "add" ? add : save}
-                    style={styles.image}
-                />
-            </TouchableOpacity>
+            {save ? (
+                <TouchableOpacity style={styles.button}>
+                    <Image source={iconSave} style={styles.image} />
+                </TouchableOpacity>
+            ) : (
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => navigation.navigate("Task")}
+                >
+                    <Image source={iconAdd} style={styles.image} />
+                </TouchableOpacity>
+            )}
             <Text style={styles.text}>Organizando sua vida.</Text>
         </View>
     );

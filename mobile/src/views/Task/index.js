@@ -18,11 +18,11 @@ import DateTimeInput from "../../components/DateTimeInput/index";
 
 import styles from "./styles";
 
-export default function Task() {
+export default function Task({ navigation }) {
     const [done, setDone] = useState(false);
     return (
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
-            <Header showBack={true} />
+            <Header showBack={true} navigation={navigation} />
 
             <ScrollView style={{ width: "100%" }}>
                 <ScrollView
@@ -74,7 +74,7 @@ export default function Task() {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-            <Footer icon={"save"} />
+            <Footer icon={"save"} save={true} />
         </KeyboardAvoidingView>
     );
 }

@@ -16,7 +16,7 @@ import TaskCard from "../../components/TaskCard";
 
 import api from "../../services/api";
 
-export default function Home() {
+export default function Home({ navigation }) {
     const [filter, setFilter] = useState("today");
     const [tasks, setTasks] = useState([]);
     const [load, setLoad] = useState(false);
@@ -137,7 +137,7 @@ export default function Home() {
                 )}
             </ScrollView>
 
-            <Footer icon={"add"}></Footer>
+            <Footer icon={"add"} navigation={navigation}></Footer>
         </View>
     );
 }
