@@ -72,6 +72,10 @@ const styles = StyleSheet.create({
         textTransform: "uppercase",
         fontSize: 16,
     },
+
+    typeIconInative: {
+        opacity: 0.5,
+    },
 });
 
 export default styles;

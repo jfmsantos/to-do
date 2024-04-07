@@ -1,67 +1,39 @@
-import React, { useState } from "react";
-import { TouchableOpacity, Image, TextInput } from "react-native";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import React, { useState, useEffect } from "react";
+import { TouchableOpacity, Image, TextInput, Alert } from "react-native";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { format } from "date-fns";
 import styles from "./styles";
 import iconCalendar from "../../assets/calendar.png";
 import iconClock from "../../assets/clock.png";
 
-export default function DataTimeInputAndroid({ type }) {
+export default function DateTimeInputAndroid({ type, save }) {
     const [dateTime, setDateTime] = useState();
+    const [show, setShow] = useState(false);
+    const [mode, setMode] = useState("date");
 
-    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
-
-    function showDatePicker() {
-        setDatePickerVisibility(true);
-    }
-    const hideDatePicker = () => {
-        setDatePickerVisibility(false);
-    };
-
-    const showTimePicker = () => {
-        setTimePickerVisibility(true);
-    };
-    const hideTimePicker = () => {
-        setTimePickerVisibility(false);
-    };
-
-    const handleConfirm = (date) => {
-        if ({ date } == "") {
-            hideDatePicker();
-        } else if (isPast(new Date(date), "dd/MM/yyyy")) {
-            Alert.alert("Escolha uma data atual");
-            hideDatePicker();
-        } else {
-            setDateTime(format(new Date(date), "dd/MM/yyyy"));
-            save(format(new Date(`${date}`), "yyy-MM-dd"));
-            hideDatePicker();
-        }
-    };
-
-    const handleTimeConfirm = (date) => {
-        if ({ date } == "") {
-            hideTimePicker();
-        } else {
-            setDateTime(format(new Date(date), "HH:mm"));
-            save(format(new Date(`${date}`), "HH:mm"));
-            hideTimePicker();
-        }
-    };
-
-    async function selectDateOrHour() {
+    const newTime = (event, value) => {
+        const currentDate = value || dateTime;
         if (type == "date") {
-            {
-                showDatePicker();
-            }
-        } else if (type == "hour") {
-            {
-                showTimePicker();
-            }
+            setShow(false);
+            setDateTime(format(new Date(currentDate), "dd/MM/yyyy"));
+            save(format(new Date(currentDate), "yyyy-MM-dd"));
+        } else {
+            setShow(false);
+            setDateTime(format(new Date(currentDate), "HH:mm"));
+            save(format(new Date(currentDate), "HH:mm"));
+        }
+    };
+    async function selectDataOrHour() {
+        if (type == "date") {
+            setShow(true);
+            setMode("date");
+        } else {
+            setShow(true);
+            setMode("time");
         }
     }
-
     return (
-        <TouchableOpacity onPress={selectDateOrHour}>
+        <TouchableOpacity onPress={selectDataOrHour}>
             <TextInput
                 style={styles.textInput}
                 placeholder={
@@ -72,20 +44,15 @@ export default function DataTimeInputAndroid({ type }) {
                 editable={false}
                 value={dateTime}
             />
-            <DateTimePickerModal
-                isVisible={isDatePickerVisible}
-                mode="date"
-                nConfirm={handleConfirm}
-                onCancel={hideDatePicker}
-            />
-            <DateTimePickerModal
-                isVisible={isTimePickerVisible}
-                mode="time"
-                is24Hour
-                locale="pt_br"
-                onConfirm={handleTimeConfirm}
-                onCancel={hideTimePicker}
-            />
+            {show && (
+                <DateTimePicker
+                    value={new Date()}
+                    mode={mode}
+                    is24Hour={true}
+                    display="default"
+                    onChange={newTime}
+                />
+            )}
             <Image
                 style={styles.iconTextInput}
                 source={type == "date" ? iconCalendar : iconClock}
