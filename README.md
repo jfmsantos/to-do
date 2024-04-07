@@ -27,7 +27,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 </p>
 </details>
 
-<details><summary>Tela - Cadastrar Nova Tarefas</summary>
+<details><summary>Tela - Cadastrar Tarefa</summary>
 <p>
 
 #### Tela para cadastro de uma nova tarefa.
@@ -69,8 +69,6 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## Versão Mobile
 
-
-
 <details><summary>Tela - Inicial</summary>
 <p>
 
@@ -80,12 +78,23 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 </p>
 </details>
+
 <details><summary>Tela - Home</summary>
 <p>
 
 #### Home.
 
 <img src="/prototipo/mobile/home.jpeg">
+
+</p>
+</details>
+
+<details><summary>Tela - Cadastrar Tarefa</summary>
+<p>
+
+#### Cadastrar Tarefa.
+
+<img src="/prototipo/mobile/tarefa.jpeg">
 
 </p>
 </details>
