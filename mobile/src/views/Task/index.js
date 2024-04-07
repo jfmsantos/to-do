@@ -8,6 +8,7 @@ import {
     KeyboardAvoidingView,
     TouchableOpacity,
     Switch,
+    Alert,
 } from "react-native";
 
 //COMPONENTES
@@ -17,6 +18,7 @@ import typeIcons from "../../utils/typeIcons";
 import DateTimeInput from "../../components/DateTimeInput/index";
 
 import styles from "./styles";
+import api from "../../services/api";
 
 export default function Task({ navigation }) {
     const [done, setDone] = useState(false);
@@ -26,6 +28,36 @@ export default function Task({ navigation }) {
     const [date, setDate] = useState();
     const [hour, setHour] = useState();
     const [macaddress, setMacaddress] = useState("11:11:11:11:11:11");
+
+    async function New() {
+        if (!type) {
+            return alert("Você precisa selecionar o tipo da terefa");
+        } else if (!title) {
+            return alert("Você precisa informar o título da terefa");
+        } else if (title.length < 5) {
+            return alert(
+                "Informar no mínimo 5 caracteres para o título da terefa"
+            );
+        } else if (!description) {
+            return alert("Você precisa informar a descrição da terefa");
+        } else if (!date) {
+            return alert("Você precisa definir a data da terefa");
+        } else if (!hour) {
+            return alert("Você precisa definir a hora da terefa");
+        }
+
+        await api
+            .post("", {
+                macaddress,
+                type,
+                title,
+                description,
+                when: `${date}T${hour}.000`,
+            })
+            .then(() => {
+                navigation.navigate("Home");
+            });
+    }
 
     return (
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -92,7 +124,7 @@ export default function Task({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-            <Footer icon={"save"} save={true} />
+            <Footer icon={"save"} save={true} onPress={New} />
         </KeyboardAvoidingView>
     );
 }

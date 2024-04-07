@@ -5,11 +5,11 @@ import styles from "./styles";
 import iconAdd from "../../assets/add.png";
 import iconSave from "../../assets/save.png";
 
-export default function Footer({ icon, navigation, save }) {
+export default function Footer({ icon, navigation, save, onPress }) {
     return (
         <View style={styles.container}>
             {save ? (
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={onPress}>
                     <Image source={iconSave} style={styles.image} />
                 </TouchableOpacity>
             ) : (
