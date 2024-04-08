@@ -21,7 +21,8 @@ import DateTimeInput from "../../components/DateTimeInput/index";
 import styles from "./styles";
 import api from "../../services/api";
 
-export default function Task({ navigation }) {
+export default function Task({ navigation, idTask }) {
+    const [id, setId] = useState();
     const [done, setDone] = useState(false);
     const [type, setType] = useState();
     const [title, setTitle] = useState();
@@ -70,6 +71,7 @@ export default function Task({ navigation }) {
         }
     }
     useEffect(() => {
+        setId(idTask);
         getMacAddress();
     });
 
@@ -123,20 +125,21 @@ export default function Task({ navigation }) {
 
                 <DateTimeInput type={"date"} save={setDate} />
                 <DateTimeInput type={"hour"} save={setHour} />
-
-                <View style={styles.inLine}>
-                    <View style={styles.inputInLine}>
-                        <Switch
-                            onValueChange={() => setDone(!done)}
-                            value={done}
-                            thumbColor={done ? "#00761B" : "#EE6B26"}
-                        />
-                        <Text style={styles.switchLabel}>Concluído</Text>
+                {id && (
+                    <View style={styles.inLine}>
+                        <View style={styles.inputInLine}>
+                            <Switch
+                                onValueChange={() => setDone(!done)}
+                                value={done}
+                                thumbColor={done ? "#00761B" : "#EE6B26"}
+                            />
+                            <Text style={styles.switchLabel}>Concluído</Text>
+                        </View>
+                        <TouchableOpacity>
+                            <Text style={styles.removeLabel}>EXCLUÍR</Text>
+                        </TouchableOpacity>
                     </View>
-                    <TouchableOpacity>
-                        <Text style={styles.removeLabel}>EXCLUÍR</Text>
-                    </TouchableOpacity>
-                </View>
+                )}
             </ScrollView>
             <Footer icon={"save"} save={true} onPress={New} />
         </KeyboardAvoidingView>

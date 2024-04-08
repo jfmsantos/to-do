@@ -146,6 +146,8 @@ export default function Home({ navigation }) {
                             title={t.title}
                             when={t.when}
                             type={t.type}
+                            idTask={t._id}
+                            navigation={navigation}
                         />
                     ))
                 )}
