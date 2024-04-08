@@ -6,6 +6,7 @@ import {
     ScrollView,
     ActivityIndicator,
 } from "react-native";
+import * as Application from "expo-application";
 
 import styles from "./styles";
 
@@ -21,11 +22,22 @@ export default function Home({ navigation }) {
     const [tasks, setTasks] = useState([]);
     const [load, setLoad] = useState(false);
     const [lateCount, setLateCount] = useState();
+    const [macaddress, setMacaddress] = useState();
+
+    async function getMacAddress() {
+        if (Platform.OS == "ios") {
+            Application.getIosIdForVendorAsync().then((id) => {
+                setMacaddress(id);
+            });
+        } else {
+            setMacaddress(Application.androidId);
+        }
+    }
 
     async function loadTasks() {
         setLoad(true);
         await api
-            .get(`/filter/${filter}/11:11:11:11:11:11`)
+            .get(`/filter/${filter}/${macaddress}`)
             .then((response) => {
                 setTasks(response.data);
                 setLoad(false);
@@ -34,7 +46,7 @@ export default function Home({ navigation }) {
     }
 
     async function lateVerify() {
-        await api.get(`/filter/late/11:11:11:11:11:11`).then((response) => {
+        await api.get(`/filter/late/${macaddress}`).then((response) => {
             setLateCount(response.data.length);
         });
     }
@@ -44,9 +56,11 @@ export default function Home({ navigation }) {
     }
 
     useEffect(() => {
+        getMacAddress();
         loadTasks();
+
         lateVerify();
-    }, [filter]);
+    }, [filter, macaddress]);
 
     return (
         <View style={styles.container}>

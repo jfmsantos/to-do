@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     View,
     ScrollView,
@@ -10,6 +10,7 @@ import {
     Switch,
     Alert,
 } from "react-native";
+import * as Application from "expo-application";
 
 //COMPONENTES
 import Header from "../../components/Header";
@@ -27,7 +28,7 @@ export default function Task({ navigation }) {
     const [description, setDescription] = useState();
     const [date, setDate] = useState();
     const [hour, setHour] = useState();
-    const [macaddress, setMacaddress] = useState("11:11:11:11:11:11");
+    const [macaddress, setMacaddress] = useState();
 
     async function New() {
         if (!type) {
@@ -58,6 +59,19 @@ export default function Task({ navigation }) {
                 navigation.navigate("Home");
             });
     }
+
+    async function getMacAddress() {
+        if (Platform.OS == "ios") {
+            Application.getIosIdForVendorAsync().then((id) => {
+                setMacaddress(id);
+            });
+        } else {
+            setMacaddress(Application.androidId);
+        }
+    }
+    useEffect(() => {
+        getMacAddress();
+    });
 
     return (
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
