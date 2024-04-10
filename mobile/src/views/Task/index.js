@@ -102,6 +102,22 @@ export default function Task({ navigation, route }) {
             setLoad(false);
         }
     }
+
+    async function DeleteTask() {
+        await api.delete(`/${id}`).then(() => {
+            navigation.navigate("Home");
+        });
+    }
+    async function Remove() {
+        Alert.alert("Remover Tarefa", "Deseja realmente remover essa tarefa?", [
+            { text: "Cancelar" },
+            { text: "Confirmar", onPress: () => DeleteTask() },
+        ]);
+        {
+            cancelable: true;
+        }
+    }
+
     useEffect(() => {
         getMacAddress();
         if (route.params && route.params.idTask) {
@@ -178,7 +194,7 @@ export default function Task({ navigation, route }) {
                                     Concluído
                                 </Text>
                             </View>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={Remove}>
                                 <Text style={styles.removeLabel}>EXCLUÍR</Text>
                             </TouchableOpacity>
                         </View>
