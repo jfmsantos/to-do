@@ -6,12 +6,12 @@ import styles from "./styles";
 import iconCalendar from "../../assets/calendar.png";
 import iconClock from "../../assets/clock.png";
 
-export default function DateTimeInputAndroid({ type, save }) {
+export default function DateTimeInputAndroid({ type, save, date, hour }) {
     const [dateTime, setDateTime] = useState();
     const [show, setShow] = useState(false);
     const [mode, setMode] = useState("date");
 
-    const newTime = (event, value) => {
+    const newDateTime = (event, value) => {
         const currentDate = value || dateTime;
         if (type == "date") {
             setShow(false);
@@ -23,6 +23,7 @@ export default function DateTimeInputAndroid({ type, save }) {
             save(format(new Date(currentDate), "HH:mm:ss"));
         }
     };
+
     async function selectDataOrHour() {
         if (type == "date") {
             setShow(true);
@@ -32,6 +33,17 @@ export default function DateTimeInputAndroid({ type, save }) {
             setMode("time");
         }
     }
+
+    useEffect(() => {
+        if (type == "date" && date) {
+            setDateTime(format(new Date(date), "dd/MM/yyyy"));
+        }
+
+        if (type == "hour" && hour) {
+            setDateTime(format(new Date(hour), "HH:mm"));
+        }
+    }, [date, hour]);
+
     return (
         <TouchableOpacity onPress={selectDataOrHour}>
             <TextInput
@@ -50,7 +62,7 @@ export default function DateTimeInputAndroid({ type, save }) {
                     mode={mode}
                     is24Hour={true}
                     display="default"
-                    onChange={newTime}
+                    onChange={newDateTime}
                 />
             )}
             <Image
