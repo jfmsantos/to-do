@@ -37,12 +37,14 @@ export default function DateTimeInputAndroid({ type, save, date, hour }) {
     useEffect(() => {
         if (type == "date" && date) {
             setDateTime(format(new Date(date), "dd/MM/yyyy"));
+            save(format(new Date(date), "yyyy-MM-dd"));
         }
 
         if (type == "hour" && hour) {
             setDateTime(format(new Date(hour), "HH:mm"));
+            save(format(new Date(hour), "HH:mm:ss"));
         }
-    }, [date, hour]);
+    }, []);
 
     return (
         <TouchableOpacity onPress={selectDataOrHour}>
@@ -60,8 +62,10 @@ export default function DateTimeInputAndroid({ type, save, date, hour }) {
                 <DateTimePicker
                     value={new Date()}
                     mode={mode}
-                    is24Hour={true}
                     display="default"
+                    {...(mode === "date"
+                        ? { minimumDate: new Date() }
+                        : { is24Hour: true })}
                     onChange={newDateTime}
                 />
             )}

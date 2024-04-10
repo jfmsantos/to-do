@@ -33,7 +33,7 @@ export default function Task({ navigation, route }) {
     const [macaddress, setMacaddress] = useState();
     const [load, setLoad] = useState(true);
 
-    async function New() {
+    async function SaveTask() {
         if (!type) {
             return alert("Você precisa selecionar o tipo da terefa");
         } else if (!title) {
@@ -50,17 +50,35 @@ export default function Task({ navigation, route }) {
             return alert("Você precisa definir a hora da terefa");
         }
 
-        await api
-            .post("", {
-                macaddress,
-                type,
-                title,
-                description,
-                when: `${date}T${hour}.000`,
-            })
-            .then(() => {
-                navigation.navigate("Home");
-            });
+        if (id) {
+            await api
+                .put(`/${id}`, {
+                    macaddress,
+                    done,
+                    type,
+                    title,
+                    description,
+                    when: `${date}T${hour}.000`,
+                })
+                .then(() => {
+                    navigation.navigate("Home");
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        } else {
+            await api
+                .post("", {
+                    macaddress,
+                    type,
+                    title,
+                    description,
+                    when: `${date}T${hour}.000`,
+                })
+                .then(() => {
+                    navigation.navigate("Home");
+                });
+        }
     }
 
     async function LoadTask() {
@@ -167,7 +185,7 @@ export default function Task({ navigation, route }) {
                     )}
                 </ScrollView>
             )}
-            <Footer icon={"save"} save={true} onPress={New} />
+            <Footer icon={"save"} save={true} onPress={SaveTask} />
         </KeyboardAvoidingView>
     );
 }
