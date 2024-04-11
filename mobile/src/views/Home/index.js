@@ -69,6 +69,7 @@ export default function Home({ navigation }) {
                 showBack={false}
                 pressNotification={Notification}
                 late={lateCount}
+                navigation={navigation}
             />
 
             <View style={styles.filter}>

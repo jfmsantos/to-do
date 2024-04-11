@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Home from "./src/views/Home";
 import Task from "./src/views/Task";
+import QrCode from "./src/views/QrCode";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,11 @@ export default function App() {
                 <Stack.Screen
                     name="Task"
                     component={Task}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="QrCode"
+                    component={QrCode}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

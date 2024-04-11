@@ -25,7 +25,10 @@ export default function Header({
                     <Image source={back} style={styles.leftIconImage} />
                 </TouchableOpacity>
             ) : (
-                <TouchableOpacity style={styles.leftIcon}>
+                <TouchableOpacity
+                    style={styles.leftIcon}
+                    onPress={() => navigation.navigate("QrCode")}
+                >
                     <Image source={qrcode} style={styles.leftIconImage} />
                 </TouchableOpacity>
             )}
