@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as S from "./styles";
 import Qr from "qrcode.react";
 import { useNavigate } from "react-router-dom";
+import api from "../../services/api";
 
 //Componentes
 import Header from "../../components/Header";
@@ -15,11 +16,22 @@ function Qrcode() {
         if (!mac) {
             alert("Você precisa informar o número que apareceu no celular!");
         } else {
-            await localStorage.setItem("@todo/macaddress", mac);
-            navigate("/");
-            window.location.reload();
+            localStorage.setItem("@todo/macaddress", mac);
+            validarIdentificacao();
         }
     }
+
+    async function validarIdentificacao() {
+        await api.get(`/task/filter/all/${mac}`).then((response) => {
+            if (response.data.length > 0) {
+                navigate("/");
+                window.location.reload();
+            } else {
+                alert("Não há tarefas para a identificação informada!");
+            }
+        });
+    }
+
     return (
         <S.Container>
             <Header></Header>
