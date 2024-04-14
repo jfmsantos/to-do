@@ -97,3 +97,23 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 </p>
 </details>
+
+<details><summary>Tela - Qrcode</summary>
+<p>
+
+#### Ler Qrcode.
+
+<img src="/prototipo/mobile/qrCode.jpeg">
+
+</p>
+</details>
+
+<details><summary>Tela - Qrcode Identificação.</summary>
+<p>
+
+#### Ler Qrcode.
+
+<img src="/prototipo/mobile/identificacao.jpeg">
+
+</p>
+</details>
