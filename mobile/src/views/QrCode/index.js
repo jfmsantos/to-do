@@ -44,7 +44,7 @@ export default function QrCode({ navigation }) {
         <View style={styles.container}>
             <BarCodeScanner
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-                syle={StyleSheet.absoluteFillObject}
+                style={StyleSheet.absoluteFillObject}
             />
             <View style={styles.header}>
                 <Text style={styles.headerText}>
