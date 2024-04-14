@@ -2,8 +2,7 @@
 
 <br>
 ## 💻 Projeto
-Projeto Estruturado apartir do Curso Full Stack com Adobe XD, NodeJs, MongoDB, React Native e React.
-Consiste em um agendador de tarefaz web e mobile, sicronizado por Qrcode.
+Projeto Projeto Estruturado a partir do Curso Full Stack com Adobe XD, NodeJs, MongoDB, React Native e React. Consiste em agendamento de tarefas web e mobile, sincronizado por Qrcode.
 Professor :<a href="https://github.com/orodrigogo" target="_blank"><strong> Rodrigo Santana »</strong></a>
 <br>
 ## Tecnologias
