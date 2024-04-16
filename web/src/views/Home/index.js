@@ -35,7 +35,7 @@ function Home() {
     }, [filterActived]);
     return (
         <S.Container>
-            <Header clickNotification={Notification} />
+            <Header clickNotification={Notification} notification={true} />
             <S.FilterArea>
                 <button type="button" onClick={() => setFilterActived("all")}>
                     <FilterCard

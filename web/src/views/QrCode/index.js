@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import * as S from "./styles";
 import Qr from "qrcode.react";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +34,7 @@ function Qrcode() {
 
     return (
         <S.Container>
-            <Header></Header>
+            <Header notification={false} />
             <S.Content>
                 <h1>Capture o QrCode pelo App</h1>
                 <p>Suas atividades serão sincronizadas com o seu celular.</p>

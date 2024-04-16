@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import bell from "../../assets/bell.png";
 
-function Header({ clickNotification }) {
+function Header({ clickNotification, notification }) {
     const [lateCount, setLateCount] = useState();
     const [filterActived, setFilterActived] = useState("today");
     let navigate = useNavigate();
@@ -24,7 +24,7 @@ function Header({ clickNotification }) {
 
     useEffect(() => {
         lateVerify();
-    });
+    }, []);
 
     async function Logout() {
         localStorage.removeItem("@todo/macaddress");
@@ -49,7 +49,7 @@ function Header({ clickNotification }) {
                         <span className="dividir" />
                         <Link onClick={Logout}>SAIR</Link>
 
-                        {lateCount && (
+                        {lateCount && notification && (
                             <>
                                 <span className="dividir" />
                                 <button onClick={clickNotification}>

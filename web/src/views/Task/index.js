@@ -95,7 +95,7 @@ function Task() {
     }, []);
     return (
         <S.Container>
-            <Header />
+            <Header notification={false} />
 
             <S.Form>
                 <S.TypeIcons>
